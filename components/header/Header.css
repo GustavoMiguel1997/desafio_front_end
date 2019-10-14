@@ -1,0 +1,14 @@
+.header-style {
+  align-items: center;
+  background-color: #3480b2;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  display: flex;
+  height: 4rem;
+  padding-left: 3rem;
+}
+.header-style > .header-title {
+  color: #fff;
+  font-family: Arial;
+  font-size: 1.7rem;
+  font-weight: 800;
+}

@@ -1,0 +1,11 @@
+{
+  "presets": [
+    ["@babel/preset-env", { "useBuiltIns": "usage" }],
+    ["@babel/preset-react"]
+  ],
+  "plugins": [
+    ["@babel/plugin-transform-async-to-generator", { "loose": true }],
+    ["@babel/plugin-proposal-class-properties"],
+    ["inline-json-import", {}]
+  ]
+}
