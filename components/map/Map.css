@@ -1,6 +1,7 @@
 .map-style {
-  border: 1px solid black;
+  border: 0.1rem solid #cacccc;
   border-radius: 0.3rem;
+  box-sizing: border-box;
   height: 65vh;
   margin: 0 auto;
   width: 90%;

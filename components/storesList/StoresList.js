@@ -2,29 +2,11 @@ import React from "react";
 import "./StoresList.css";
 
 export default function StoresList(props) {
-  function store(name, revenue, searchName = "") {
-    if (revenue >= 15000 && name.includes(searchName)) {
-      return (
-        <li key={revenue} className="item-list">
-          <div className="item-style">
-            <h1>{name}</h1>
-            <h1>{revenue}</h1>
-          </div>
-        </li>
-      );
-    } else if (name.includes(searchName)) {
-      return (
-        <li key={revenue} className="item-list">
-          <div className="item-style red-text">
-            <h1>{name}</h1>
-            <h1>{revenue}</h1>
-          </div>
-        </li>
-      );
-    }
-  }
+  let userText = "";
+  if (props.userText) userText = props.userText.value;
 
   const storesList = props.storesList;
+  let count = 0;
   return (
     <div className="list-style">
       <ul className="ul-position">
@@ -34,9 +16,32 @@ export default function StoresList(props) {
             <h1 className="revenue-style">Faturamento</h1>
           </div>
         </li>
-        {storesList.map(({ name, revenue }, index) => {
-          if (index < 10) {
-            return store(name, revenue);
+        {storesList.map(({ name, revenue }) => {
+          if (count < 10) {
+            if (
+              revenue >= 15000 &&
+              name.toLowerCase().includes(userText.toLowerCase())
+            ) {
+              count++;
+              return (
+                <li key={revenue} className="item-list">
+                  <div className="item-style">
+                    <h1>{name}</h1>
+                    <h1>R$ {revenue.toLocaleString("pt-BR")}</h1>
+                  </div>
+                </li>
+              );
+            } else if (name.toLowerCase().includes(userText.toLowerCase())) {
+              count++;
+              return (
+                <li key={revenue} className="item-list">
+                  <div className="item-style red-text">
+                    <h1>{name}</h1>
+                    <h1>R$ {revenue.toLocaleString("pt-BR")}</h1>
+                  </div>
+                </li>
+              );
+            }
           }
         })}
       </ul>
