@@ -1,11 +1,10 @@
 import React from "react";
 import "./StoresList.css";
 
-export default function StoresList(props) {
-  let userText = "";
-  if (props.userText) userText = props.userText.value;
+export default function StoresList({ storesList, userText, userRevenue }) {
+  userText = userText ? userText.value : "";
+  userRevenue = userRevenue ? userRevenue.value : 15000;
 
-  const storesList = props.storesList;
   let count = 0;
   return (
     <div className="list-style">
@@ -16,10 +15,11 @@ export default function StoresList(props) {
             <h1 className="revenue-style">Faturamento</h1>
           </div>
         </li>
-        {storesList.map(({ name, revenue }) => {
+        {storesList.map(({ name, revenue }, index) => {
           if (count < 10) {
+            userRevenue = userRevenue ? userRevenue : 15000;
             if (
-              revenue >= 15000 &&
+              revenue >= userRevenue &&
               name.toLowerCase().includes(userText.toLowerCase())
             ) {
               count++;
@@ -38,6 +38,14 @@ export default function StoresList(props) {
                   <div className="item-style red-text">
                     <h1>{name}</h1>
                     <h1>R$ {revenue.toLocaleString("pt-BR")}</h1>
+                  </div>
+                </li>
+              );
+            } else if (index == 49 && count == 0) {
+              return (
+                <li key={revenue} className="item-list">
+                  <div className="item-style">
+                    <h1>Nenhuma loja encontrada</h1>
                   </div>
                 </li>
               );
