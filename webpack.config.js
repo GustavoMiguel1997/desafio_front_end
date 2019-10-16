@@ -24,11 +24,7 @@ module.exports = {
         test: /\.(png|jpe?g|gif|svg|ttf)$/i,
         use: [
           {
-            loader: "file-loader",
-            options: {
-              name: "[name].[ext]",
-              outputPath: "fonts/"
-            }
+            loader: "file-loader"
           }
         ]
       }
