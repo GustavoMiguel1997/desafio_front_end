@@ -1,9 +1,9 @@
 @font-face {
-  font-family: "MyWebFont"; /* IE9 Compat Modes */
-  src: url("../../resources/fonts/Lato-Bold.ttf"); /* Super Modern Browsers */
+  font-family: 'LataBold';
+  src: url('../../resources/fonts/Lato-Bold.ttf');
 }
 
-.header-style {
+.header {
   align-items: center;
   background-color: #3480b2;
   box-shadow: 2px 2px 4px 1px rgba(0, 0, 0, 0.3);
@@ -11,8 +11,8 @@
   height: 4rem;
   padding-left: 3rem;
 }
-.header-style > .header-title {
+.header__title {
   color: #fff;
-  font-family: MyWebFont;
+  font-family: LataBold;
   font-size: 1.7rem;
 }
