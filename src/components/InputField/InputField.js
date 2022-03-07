@@ -1,4 +1,5 @@
 import React from 'react';
+import { createNumberMask } from '../../helpers/helpers';
 import searchIcon from '../../resources/images/search.svg';
 import './InputField.css';
 
@@ -19,6 +20,18 @@ function InputField({
     alignRight ? ' -alignRight' : ''
   );
 
+  function handleChange(e) {
+    const { value: InputValue } = e.target;
+    const stringSize = InputValue.length;
+    let numberWithMask;
+
+    if (stringSize > 3) {
+      numberWithMask = createNumberMask(InputValue);
+      console.log(numberWithMask);
+    }
+    onChange(e);
+  }
+
   return (
     <div className={inputContainerClass}>
       {label && <label className='input-field__label'>{label}</label>}
@@ -27,7 +40,7 @@ function InputField({
         value={value}
         className={inputClass}
         placeholder={placeholder}
-        onChange={onChange}
+        onChange={handleChange}
       />
       {hasIcon && <img className='input-field__icon' src={searchIcon} />}
     </div>

@@ -1,6 +1,7 @@
 .box {
   display: flex;
   flex-direction: column;
+  position: relative;
   gap: 2rem;
   height: 600px;
   width: 100%;
