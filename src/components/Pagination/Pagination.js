@@ -8,7 +8,7 @@ function Pagination({ actualPage, pagesQuantity, onChangePage }) {
 
   const backButtonClass = ''.concat(actualPage === 1 ? ' -disabled' : '');
   const nextButtonClass = ''.concat(
-    actualPage === pagesQuantity ? ' -disabled' : ''
+    actualPage === pagesQuantity || pagesQuantity <= 1 ? ' -disabled' : ''
   );
 
   function handleClickNumericalButton(pageNumberSelected) {
