@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   entry: './src/index.js',
   output: {
-    path: path.resolve(__dirname, '/dist'),
+    path: path.join(__dirname, '/dist'),
     filename: 'bundle.js',
   },
   module: {
@@ -30,14 +30,12 @@ module.exports = {
       },
     ],
   },
-  resolve: {
-    extensions: ['.js'],
-  },
   devServer: {
     hot: true,
-    contentBase: path.resolve(__dirname, '/dist'),
+    open: true,
+    contentBase: path.join(__dirname, '/dist'),
   },
   plugins: [
-    new HtmlWebpackPlugin({ template: path.resolve('./dist/index.html') }),
+    new HtmlWebpackPlugin({ template: path.join('./dist/index.html') }),
   ],
 };

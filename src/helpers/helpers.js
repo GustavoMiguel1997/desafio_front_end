@@ -10,8 +10,8 @@ function formatValueToReal(stringValue) {
 }
 
 function createNumberMask(number) {
-  const numberWithoutDecimals = removeDecimals(number);
-  const numbersArray = numberWithoutDecimals.split('').reverse();
+  const [integer, decimal] = separeteIntegerFromDecimal(number);
+  const numbersArray = integer.split('').reverse();
   const arraysOfNumbers = seperateNumberArrayWithDots(numbersArray);
 
   const result = arraysOfNumbers.flatMap((array, index) => {
@@ -22,12 +22,19 @@ function createNumberMask(number) {
     return [...array, '.'];
   });
 
+  const validatedDecimal =
+    decimal !== undefined ? `,${validateDecimal(decimal)}` : '';
   const numberWithMask = result.reverse().join('');
-  return numberWithMask;
+
+  return `${numberWithMask}${validatedDecimal}`;
 }
 
-function removeDecimals(number) {
-  return String(number).split(',')[0];
+function validateDecimal(decimal) {
+  return String(decimal).substring(0, 2);
+}
+
+function separeteIntegerFromDecimal(number) {
+  return String(number).split(',');
 }
 
 function seperateNumberArrayWithDots(numbersArray) {
@@ -44,4 +51,9 @@ function seperateNumberArrayWithDots(numbersArray) {
   return result;
 }
 
-export { normalizeString, formatValueToReal, createNumberMask };
+export {
+  normalizeString,
+  formatValueToReal,
+  createNumberMask,
+  validateDecimal,
+};

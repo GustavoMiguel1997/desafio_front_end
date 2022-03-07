@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import DATA from '../resources/data/data.json';
-import { Header, Box, InputField, Table, Map } from '../components';
+import { Header, Box, InputField, Table, Map, InputMask } from '../components';
 import { normalizeString } from '../helpers/helpers';
 import './App.css';
 
@@ -20,7 +20,7 @@ function App() {
   return (
     <div className='app'>
       <Header />
-      <div className='app__container'>
+      <main className='app__container'>
         <Box>
           <InputField
             type='text'
@@ -32,18 +32,17 @@ function App() {
           <Table stores={currentStores} minValue={minValue} />
         </Box>
         <Box>
-          <InputField
-            type='number'
+          <InputMask
             isShorter
             alignRight
             value={minValue}
             placeholder='15.000,00'
             label='Faturamento mínimo esperado'
-            onChange={(e) => setMinValue(e.target.value)}
+            onChange={(newValue) => setMinValue(newValue)}
           />
           <Map stores={currentStores} minValue={minValue} />
         </Box>
-      </div>
+      </main>
     </div>
   );
 }
