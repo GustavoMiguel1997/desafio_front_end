@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import DATA from '../resources/data/data.json';
-import { Header, Box, InputField, Table, Map, Pagination } from '../components';
+import { Header, Box, InputField, Table, Map } from '../components';
 import { normalizeString } from '../helpers/helpers';
 import './App.css';
 
