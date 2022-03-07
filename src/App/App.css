@@ -1,0 +1,35 @@
+@font-face {
+  font-family: 'myFont';
+  src: url('../resources/fonts/Lato-Regular.ttf');
+}
+body,
+h1,
+h2,
+h3 {
+  margin: 0;
+  padding: 0;
+  font-family: myFont;
+}
+body {
+  background-color: #ecf0f0;
+}
+button,
+input {
+  outline: none;
+}
+
+.app__container {
+  padding: 3rem;
+  display: flex;
+  gap: 3rem;
+}
+
+@media only screen and (max-width: 850px) {
+  .app__container {
+    flex-direction: column;
+  }
+
+  .box:first-child {
+    margin-bottom: 5rem;
+  }
+}

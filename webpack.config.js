@@ -1,41 +1,43 @@
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: "./app.js",
+  entry: './src/index.js',
   output: {
-    path: path.resolve(__dirname, "/dist"),
-    filename: "bundle.js"
+    path: path.resolve(__dirname, '/dist'),
+    filename: 'bundle.js',
   },
   module: {
     rules: [
       {
         test: /\.js/,
         use: {
-          loader: "babel-loader"
+          loader: 'babel-loader',
         },
-        exclude: ["/node_modules/"]
+        exclude: ['/node_modules/'],
       },
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"]
+        use: ['style-loader', 'css-loader'],
       },
       {
         test: /\.(png|jpe?g|gif|svg|ttf)$/i,
         use: [
           {
-            loader: "file-loader"
-          }
-        ]
-      }
-    ]
+            loader: 'file-loader',
+          },
+        ],
+      },
+    ],
   },
   resolve: {
-    extensions: [".js"]
+    extensions: ['.js'],
   },
   devServer: {
     hot: true,
-    contentBase: path.resolve(__dirname, "/dist")
+    contentBase: path.resolve(__dirname, '/dist'),
   },
-  plugins: [new HtmlWebpackPlugin({ template: path.resolve("./index.html") })]
+  plugins: [
+    new HtmlWebpackPlugin({ template: path.resolve('./dist/index.html') }),
+  ],
 };

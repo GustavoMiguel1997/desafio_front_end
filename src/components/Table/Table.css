@@ -1,0 +1,40 @@
+@font-face {
+  font-family: 'LatoRegular';
+  src: url('../../resources/fonts/Lato-Regular.ttf');
+}
+
+.table {
+  font-family: LatoRegular;
+  font-size: 1.25rem;
+  color: #515151;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.table__list {
+  background-color: #fff;
+  border: 1px solid #cacccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.table__list__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 0.01rem solid #d0d0d0;
+  padding: 0 1rem;
+  box-sizing: border-box;
+  height: calc(550px / 11);
+}
+
+.red-text {
+  color: #a32020;
+}
