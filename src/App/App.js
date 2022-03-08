@@ -13,7 +13,7 @@ function App() {
     setStores(DATA.stores);
   }, []);
 
-  const currentStores = stores.filter(({ name }) =>
+  const filteredStores = stores.filter(({ name }) =>
     normalizeString(name).includes(normalizeString(searchValue))
   );
 
@@ -29,7 +29,7 @@ function App() {
             value={searchValue}
             onChange={(e) => setSearchValue(e.target.value)}
           />
-          <Table stores={currentStores} minValue={minValue} />
+          <Table stores={filteredStores} minValue={minValue} />
         </Box>
         <Box>
           <InputMask
@@ -40,7 +40,7 @@ function App() {
             label='Faturamento mínimo esperado'
             onChange={(newValue) => setMinValue(newValue)}
           />
-          <Map stores={currentStores} minValue={minValue} />
+          <Map stores={filteredStores} minValue={minValue} />
         </Box>
       </main>
     </div>

@@ -1,22 +1,24 @@
 import React from 'react';
 import { Map, TileLayer, Marker } from 'react-leaflet';
 import L from 'leaflet';
+import blueIcon from '../../resources/images/marker-blue.png';
+import redIcon from '../../resources/images/marker-red.png';
 import '../../../node_modules/leaflet/dist/leaflet.css';
 import './Map.css';
 
 const POSITION = [-23.6, -46.67];
-const blueIcon = getIcon('marker-blue');
-const redIcon = getIcon('marker-red');
+const { mapBlueIcon, mapRedIcon } = getMapIcons();
 
-function getIcon(iconName) {
-  return L.icon({
-    iconUrl: require(`../../resources/images/${iconName}.png`),
+function getMapIcons() {
+  const mapBlueIcon = L.icon({
+    iconUrl: blueIcon,
     iconSize: [15, 15],
   });
-}
-
-function getMarker(name, [latitude, longitude], icon) {
-  return <Marker key={name} position={[latitude, longitude]} icon={icon} />;
+  const mapRedIcon = L.icon({
+    iconUrl: redIcon,
+    iconSize: [15, 15],
+  });
+  return { mapBlueIcon, mapRedIcon };
 }
 
 function MapCreate({ stores, minValue }) {
@@ -30,8 +32,15 @@ function MapCreate({ stores, minValue }) {
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         />
         {stores.map(({ latitude, longitude, revenue, name }) => {
-          const currentIcon = revenue < currentMinValue ? redIcon : blueIcon;
-          return getMarker(name, [latitude, longitude], currentIcon);
+          const currentIcon =
+            revenue < currentMinValue ? mapRedIcon : mapBlueIcon;
+          return (
+            <Marker
+              key={name}
+              position={[latitude, longitude]}
+              icon={currentIcon}
+            />
+          );
         })}
       </Map>
     </div>

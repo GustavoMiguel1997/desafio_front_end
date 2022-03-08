@@ -51,9 +51,33 @@ function seperateNumberArrayWithDots(numbersArray) {
   return result;
 }
 
+function validateRealValue(valueToValidate) {
+  if (valueToValidate.includes(',')) {
+    const [integer, decimal] = valueToValidate.replace(',', '.').split('.');
+    return `${integer}.${validateDecimal(decimal)}`;
+  }
+  return valueToValidate;
+}
+
+function removeAllNonNumericCharacters(string) {
+  const onlyNumbersRegex = /[^0-9,]/g;
+  const onlyDotsAndCommaRegex = /(,.*?),(.*,)?/;
+  const validatedNumericString = string
+    .replace(onlyNumbersRegex, '')
+    .replace(onlyDotsAndCommaRegex, '');
+  return validatedNumericString;
+}
+
+function validateNumericString(numericString) {
+  const newNumericString = removeAllNonNumericCharacters(numericString);
+  return validateRealValue(newNumericString);
+}
+
 export {
   normalizeString,
   formatValueToReal,
   createNumberMask,
   validateDecimal,
+  validateNumericString,
+  removeAllNonNumericCharacters,
 };

@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { InputField } from '../';
-import { createNumberMask, validateDecimal } from '../../helpers/helpers';
+import {
+  createNumberMask,
+  validateNumericString,
+  removeAllNonNumericCharacters,
+} from '../../helpers/helpers';
 
 function InputMask({ value, label, placeholder, isShorter, onChange }) {
   const [visualValue, setVisualValue] = useState('');
@@ -23,19 +27,12 @@ function InputMask({ value, label, placeholder, isShorter, onChange }) {
     return valueToFormat;
   }
 
-  function validateRealValue(valueToValidate) {
-    if (valueToValidate.includes(',')) {
-      const [integer, decimal] = valueToValidate.replace(',', '.').split('.');
-      return `${integer}.${validateDecimal(decimal)}`;
-    }
-    return valueToValidate;
-  }
-
   function handleChange(e) {
-    const newValue = e.target.value.replaceAll('.', '');
-    const validatedValue = validateRealValue(newValue);
+    const { value: inputValue } = e.target;
+    const newValue = inputValue.replaceAll('.', '');
+    const validatedValue = validateNumericString(newValue);
     onChange(validatedValue);
-    setNewVisualValue(newValue);
+    setNewVisualValue(removeAllNonNumericCharacters(newValue));
   }
 
   return (

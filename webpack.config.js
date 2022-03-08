@@ -1,5 +1,4 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: './src/index.js',
@@ -7,10 +6,15 @@ module.exports = {
     path: path.join(__dirname, '/dist'),
     filename: 'bundle.js',
   },
+  devServer: {
+    hot: true,
+    open: true,
+    contentBase: path.join(__dirname, '/dist'),
+  },
   module: {
     rules: [
       {
-        test: /\.js/,
+        test: /\.js$/,
         use: {
           loader: 'babel-loader',
         },
@@ -30,12 +34,4 @@ module.exports = {
       },
     ],
   },
-  devServer: {
-    hot: true,
-    open: true,
-    contentBase: path.join(__dirname, '/dist'),
-  },
-  plugins: [
-    new HtmlWebpackPlugin({ template: path.join('./dist/index.html') }),
-  ],
 };
