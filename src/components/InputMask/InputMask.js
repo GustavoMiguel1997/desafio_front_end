@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { InputField } from '../';
+import PropTypes from 'prop-types';
+import InputField from '../InputField/InputField';
 import {
   createNumberMask,
   validateNumericString,
@@ -38,13 +39,26 @@ function InputMask({ value, label, placeholder, isShorter, onChange }) {
   return (
     <InputField
       alignRight
-      isShorter
+      isShorter={isShorter}
       value={visualValue}
       label={label}
       placeholder={placeholder}
-      onChange={handleChange}
+      onChange={(e) => handleChange(e)}
     />
   );
 }
+
+InputMask.propTypes = {
+  value: PropTypes.string,
+  label: PropTypes.string.isRequired,
+  placeholder: PropTypes.string.isRequired,
+  isShorter: PropTypes.bool,
+  onChange: PropTypes.func.isRequired,
+};
+
+InputMask.defaultProps = {
+  value: PropTypes.oneOf(['', undefined]),
+  isShorter: false,
+};
 
 export default InputMask;

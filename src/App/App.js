@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import DATA from '../resources/data/data.json';
 import { Header, Box, InputField, Table, Map, InputMask } from '../components';
 import { normalizeString } from '../helpers/helpers';
+import DATA from '../resources/data/data.json';
 import './App.css';
 
 function App() {
@@ -14,18 +14,18 @@ function App() {
   }, []);
 
   const filteredStores = stores.filter(({ name }) =>
-    normalizeString(name).includes(normalizeString(searchValue))
+    normalizeString(name).includes(normalizeString(searchValue)),
   );
 
   return (
-    <div className='app'>
+    <div className="app">
       <Header />
-      <main className='app__container'>
+      <main className="app__container">
         <Box>
           <InputField
-            type='text'
+            type="text"
             hasIcon
-            placeholder='Pesquisa'
+            placeholder="Pesquisa"
             value={searchValue}
             onChange={(e) => setSearchValue(e.target.value)}
           />
@@ -36,8 +36,8 @@ function App() {
             isShorter
             alignRight
             value={minValue}
-            placeholder='15.000,00'
-            label='Faturamento mínimo esperado'
+            placeholder="15.000,00"
+            label="Faturamento mínimo esperado"
             onChange={(newValue) => setMinValue(newValue)}
           />
           <Map stores={filteredStores} minValue={minValue} />

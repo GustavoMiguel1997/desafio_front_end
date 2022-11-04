@@ -25,7 +25,7 @@ input {
   gap: 3rem;
 }
 
-@media only screen and (max-width: 850px) {
+@media only screen and (max-width: 900px) {
   .app__container {
     flex-direction: column;
   }

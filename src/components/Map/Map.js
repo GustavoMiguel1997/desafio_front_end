@@ -1,50 +1,59 @@
 import React from 'react';
-import { Map, TileLayer, Marker } from 'react-leaflet';
-import L from 'leaflet';
-import blueIcon from '../../resources/images/marker-blue.png';
-import redIcon from '../../resources/images/marker-red.png';
-import '../../../node_modules/leaflet/dist/leaflet.css';
+import PropTypes from 'prop-types';
+import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
+import MapConfig from './config';
+import 'leaflet/dist/leaflet.css';
 import './Map.css';
 
-const POSITION = [-23.6, -46.67];
-const { mapBlueIcon, mapRedIcon } = getMapIcons();
-
-function getMapIcons() {
-  const mapBlueIcon = L.icon({
-    iconUrl: blueIcon,
-    iconSize: [15, 15],
-  });
-  const mapRedIcon = L.icon({
-    iconUrl: redIcon,
-    iconSize: [15, 15],
-  });
-  return { mapBlueIcon, mapRedIcon };
-}
+const { mapBlueIcon, mapRedIcon } = MapConfig.icons;
 
 function MapCreate({ stores, minValue }) {
   const currentMinValue = minValue || 15000;
 
+  function getIcon(revenue) {
+    return revenue < currentMinValue ? mapRedIcon : mapBlueIcon;
+  }
+
   return (
-    <div className='map-style'>
-      <Map center={POSITION} zoom={12} id='map'>
+    <div className="map-style">
+      <Map id="map" center={MapConfig.view.position} zoom={MapConfig.view.zoom}>
         <TileLayer
-          url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+          url={MapConfig.tileLayer.url}
+          attribution={MapConfig.tileLayer.attribution}
         />
-        {stores.map(({ latitude, longitude, revenue, name }) => {
-          const currentIcon =
-            revenue < currentMinValue ? mapRedIcon : mapBlueIcon;
-          return (
-            <Marker
-              key={name}
-              position={[latitude, longitude]}
-              icon={currentIcon}
-            />
-          );
-        })}
+        {stores.map(({ latitude, longitude, revenue, name }) => (
+          <Marker
+            key={name}
+            position={[latitude, longitude]}
+            icon={getIcon(revenue)}
+            /* eventHandlers={{
+              mouseover: (event) => console.log('Hover'),
+            }} */
+          >
+            <Popup>Hello</Popup>
+          </Marker>
+        ))}
       </Map>
     </div>
   );
 }
+
+MapCreate.propTypes = {
+  minValue: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  stores: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      city: PropTypes.string.isRequired,
+      state: PropTypes.string.isRequired,
+      latitude: PropTypes.number.isRequired,
+      longitude: PropTypes.number.isRequired,
+      revenue: PropTypes.number.isRequired,
+    }),
+  ).isRequired,
+};
+
+MapCreate.defaultProps = {
+  minValue: 15000,
+};
 
 export default MapCreate;
